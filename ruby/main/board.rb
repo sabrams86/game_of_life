@@ -8,7 +8,7 @@ class Board
   end
 
   def visualize(cells)
-    (0..height-1).each do |y|
+    (height-1).downto(0).each do |y|
       (0..length-1).each do |x|
         print cells.include?([x,y]) ? "*" : "-"
         print " "
@@ -36,16 +36,16 @@ class Board
   def calculateNeighbors(cells, x,y)
     neighbors = 0
     # top row
-    neighbors = neighbors + 1 if cells.include([x-1, y+1])
-    neighbors = neighbors + 1 if cells.include([x, y+1])
-    neighbors = neighbors + 1 if cells.include([x+1, y+1])
+    neighbors = neighbors + 1 if cells.include?([(x-1), (y+1)])
+    neighbors = neighbors + 1 if cells.include?([x, (y+1)])
+    neighbors = neighbors + 1 if cells.include?([(x+1), (y+1)])
     # middle row
-    neighbors = neighbors + 1 if cells.include([x, y-1])
-    neighbors = neighbors + 1 if cells.include([x, y+1])
+    neighbors = neighbors + 1 if cells.include?([(x+1), y])
+    neighbors = neighbors + 1 if cells.include?([(x-1), y])
     # bottom row
-    neighbors = neighbors + 1 if cells.include([x-1, y-1])
-    neighbors = neighbors + 1 if cells.include([x, y-1])
-    neighbors = neighbors + 1 if cells.include([x+1, y-1])
+    neighbors = neighbors + 1 if cells.include?([(x-1), (y-1)])
+    neighbors = neighbors + 1 if cells.include?([x, (y-1)])
+    neighbors = neighbors + 1 if cells.include?([(x+1), (y-1)])
     return neighbors
   end
 
